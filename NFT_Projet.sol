@@ -26,7 +26,7 @@ contract newNFT is NFTokenMetadata, Ownable {
     super._setTokenUri(_tokenId, _uri);
   }
   
-  function generateCharacter(address _to, uint256 _tokenId) public {
+  function generateMonster(address _to, uint256 _tokenId) public {
     Monster storage newMonster = monsters[_tokenId];
     newMonster.Strenth = 7;
     newMonster.Sex = "M";
@@ -37,9 +37,12 @@ contract newNFT is NFTokenMetadata, Ownable {
     _mint(_to, _tokenId);
   }
   
-  function getMonster(uint256 _tokenId) public view returns (uint256, string memory, string memory, string memory)  {
+  function getMonstersCharacteristics(uint256 _tokenId) public view returns (uint256, string memory, string memory, string memory)  {
     Monster storage m = monsters[_tokenId];
     return (m.Strenth,m.Sex,m.Image,m.Name);
-}
+  }
+ 
+ 
+  
  
 }
