@@ -20,6 +20,7 @@ struct Monster {
 
 mapping(uint256 => Monster) monsters;
 uint256[] public MonsterIds;
+string public lastFight;
 
 function mint(address _to, uint256 _tokenId, string calldata _uri) external onlyOwner {
     super._mint(_to, _tokenId);
@@ -69,4 +70,26 @@ function getMonster(uint256 _tokenId) public view returns (uint256, string memor
     
   }
   
+  function breeding(address _to, uint256 _tokenId, uint256 _tokenId1, uint256 _tokenId2, string memory name) public {
+    Monster storage newMonster = monsters[_tokenId];
+    newMonster.Sex = monsters[_tokenId1].Sex;
+    newMonster.Image = monsters[_tokenId2].Image;
+    newMonster.Name = name;
+    uint256 Strength1 = monsters[_tokenId1].Strength;
+    uint256 Strength2 = monsters[_tokenId2].Strength; 
+    
+    if (Strength1>Strength2) {
+        newMonster.Strength = Strength1;
+    }
+    else {
+        newMonster.Strength = Strength2;
+    }
+    
+    
+    MonsterIds.push(_tokenId);
+    _mint(_to, _tokenId);
+}
+    
+    
+      
 }
