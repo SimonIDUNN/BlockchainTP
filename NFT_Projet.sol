@@ -72,19 +72,25 @@ function getMonster(uint256 _tokenId) public view returns (uint256, string memor
   
   function breeding(address _to, uint256 _tokenId, uint256 _tokenId1, uint256 _tokenId2, string memory name) public {
     Monster storage newMonster = monsters[_tokenId];
-    newMonster.Sex = monsters[_tokenId1].Sex;
-    newMonster.Image = monsters[_tokenId2].Image;
     newMonster.Name = name;
-    uint256 Strength1 = monsters[_tokenId1].Strength;
-    uint256 Strength2 = monsters[_tokenId2].Strength; 
     
-    if (Strength1>Strength2) {
-        newMonster.Strength = Strength1;
+    numrand_sex = random(2)
+    if(numrand_sex>0){
+        numrand_sex = _tokenId1;
+    } else {
+        numrand_sex = _tokenId2;
     }
-    else {
-        newMonster.Strength = Strength2;
-    }
+    newMonster.Sex = monsters[numrand_sex].Sex
     
+    numrand_img = random(2)
+    if(numrand_img>0){
+        numrand_img = _tokenId1;
+    } else {
+        numrand_img = _tokenId2;
+    }
+    newMonster.Image = monsters[numrand_img].Image
+    
+    newMonster.Strength = monsters[_tokenId1].Strength
     
     MonsterIds.push(_tokenId);
     _mint(_to, _tokenId);
