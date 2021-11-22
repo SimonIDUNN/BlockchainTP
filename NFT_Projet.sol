@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.0;
 
-import "https://github.com/0xcert/ethereum-erc721/src/contracts/tokens/nf-token-metadata.sol";
-import "https://github.com/0xcert/ethereum-erc721/src/contracts/ownership/ownable.sol";
+import "https://github.com/0xcert/ethereum-erc721/blob/master/src/contracts/tokens/nf-token-metadata.sol";
+import "https://github.com/0xcert/ethereum-erc721/blob/master/src/contracts/ownership/ownable.sol";
 
 contract newNFT is NFTokenMetadata, Ownable {
 
@@ -47,4 +47,26 @@ function getMonster(uint256 _tokenId) public view returns (uint256, string memor
     return (m.Strength,m.Sex,m.Image,m.Name);
 }
 
+  
+  function fight(uint256 _tokenId1, uint256 _tokenId2) public returns (string memory) {
+    //   require (msg.sender == onlyOwner(_tokenId1));
+    //   Monster storage monster1 = monsters[_tokenId1];
+    //   Monster storage monster2 = monsters[_tokenId2];
+      uint256 Strength1 = monsters[_tokenId1].Strength * random(101)/100;
+      uint256 Strength2 = monsters[_tokenId2].Strength * random(101)/100;
+      string memory winner;
+      if (Strength1 > Strength2) {
+          monsters[_tokenId1].Strength = monsters[_tokenId1].Strength + 1;
+          winner = monsters[_tokenId1].Name;
+        //   return (monsters[_tokenId1].Name, monsters[_tokenId1].Strength);
+      }
+      else {
+          monsters[_tokenId2].Strength = monsters[_tokenId2].Strength + 1;
+          winner = monsters[_tokenId2].Name;
+        //   return (monsters[_tokenId2].Name, monsters[_tokenId2].Strength);
+      }
+      return winner;    
+    
+  }
+  
 }
