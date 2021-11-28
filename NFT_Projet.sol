@@ -3,6 +3,7 @@ pragma solidity 0.8.0;
 
 import "https://github.com/0xcert/ethereum-erc721/blob/master/src/contracts/tokens/nf-token-metadata.sol";
 import "https://github.com/0xcert/ethereum-erc721/blob/master/src/contracts/ownership/ownable.sol";
+import {ERC20Spendable} from "./EPFToken.sol";
 
 contract newNFT is NFTokenMetadata, Ownable {
 
@@ -18,6 +19,8 @@ struct Monster {
     string Name;
 }
 
+uint256 _mintingPrice = 20;
+
 mapping(uint256 => Monster) monsters;
 uint256[] public MonsterIds;
 string public lastFight;
@@ -32,7 +35,8 @@ function random(uint256 limit) public view returns (uint) {
     return randomHash % limit;
 }
 
-function generateCharacter(address _to, uint256 _tokenId, string memory sex, string memory image, string memory name) public {
+function generateCharacter(address _contract, address _to, uint256 _tokenId, string memory sex, string memory image, string memory name) public {
+    ERC20Spendable(_contract).spend(_to, _mintingPrice);
     Monster storage newMonster = monsters[_tokenId];
     newMonster.Strength = random(6);
     newMonster.Sex = sex;
@@ -74,28 +78,26 @@ function getMonster(uint256 _tokenId) public view returns (uint256, string memor
     Monster storage newMonster = monsters[_tokenId];
     newMonster.Name = name;
     
-    numrand_sex = random(2)
+    uint256 numrand_sex = random(2);
     if(numrand_sex>0){
         numrand_sex = _tokenId1;
     } else {
         numrand_sex = _tokenId2;
     }
-    newMonster.Sex = monsters[numrand_sex].Sex
+    newMonster.Sex = monsters[numrand_sex].Sex;
     
-    numrand_img = random(2)
+    uint256 numrand_img = random(2);
     if(numrand_img>0){
         numrand_img = _tokenId1;
     } else {
         numrand_img = _tokenId2;
     }
-    newMonster.Image = monsters[numrand_img].Image
+    newMonster.Image = monsters[numrand_img].Image;
     
-    newMonster.Strength = monsters[_tokenId1].Strength
+    newMonster.Strength = monsters[_tokenId1].Strength;
     
     MonsterIds.push(_tokenId);
     _mint(_to, _tokenId);
 }
-    
-    
-      
+
 }
