@@ -4,4 +4,6 @@
 
 ## Demo
 
-![test replacement text](./demo/0.png)
+![test replacement text](./Demo/0.png)
+
+<img src="./Demo/0.png">
