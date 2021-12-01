@@ -42,34 +42,41 @@ _(Be sure to deploy the EPFToken first, we need it to create new characters!)_
 ## Demo
 
 1. Copy the address of your wallet (you're going to need it a lot!).
+
 ![MetaMask Widget](./Demo/0.png)
 
 
 2. In the DEPLOY & RUN TRANSACTIONS tab, you have the functions of the contracts. Open the ERC20 contract and paste your address in the `mint` function in order to get 200 Tokens. Click transact button.
+
 ![mint function](./Demo/1.png)
 
 You can verify that you get your tokens with the `balanceOf` function.
 
 
 3. Open the newNFT contract and paste your address and the address of the ERC20 contract in the `generateCharacter` function in order to generate a character. You can use the same values on screeshots or not. Click transact button.
+
 ![generateCharacter function](./Demo/2.png)
 
 
 4. You can verify that you paid 20 Tokens.
+
 ![balanceOf function](./Demo/3.png)
 
 
 5. You can check that your monster is created with the `getMonster` function.
+
 ![getMonster function](./Demo/4.png)
 
 
 6. Generate a second character for the demo.
+
 ![generateCharacter function](./Demo/5.png)
 
 ![getMonster function](./Demo/6.png)
 
 
 7. You can test the `fight` function and see that the winner was rewarded with a new level of strength.
+
 ![fight function](./Demo/7.png)
 
 ![getMonster function](./Demo/8.png)
@@ -78,6 +85,7 @@ You can verify that you get your tokens with the `balanceOf` function.
 
 
 8. Finally you can test the `breeding` function to get a new monster from two parents monsters.
+
 ![breeding function](./Demo/10.png)
 
 ![getMonster function](./Demo/11.png)
